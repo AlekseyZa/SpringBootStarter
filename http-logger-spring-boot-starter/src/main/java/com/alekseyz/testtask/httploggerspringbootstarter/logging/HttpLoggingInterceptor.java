@@ -2,6 +2,7 @@ package com.alekseyz.testtask.httploggerspringbootstarter.logging;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
@@ -21,24 +22,23 @@ public class HttpLoggingInterceptor implements HandlerInterceptor {
 
     private static final Logger logger = Logger.getLogger(HttpLoggingInterceptor.class);
     private LocalDateTime requestReceiveTime;
-    private LocalDateTime responseSendTime;
+    private LogView logView;
 
     @Override
     public boolean preHandle(
-            @NonNull HttpServletRequest request,
-            @NonNull HttpServletResponse response,
-            @NonNull Object handler) {
+            HttpServletRequest request,
+            HttpServletResponse response,
+            Object handler) {
         requestReceiveTime = LocalDateTime.now();
         return true;
     }
-
     @Override
     public void afterCompletion(
-            HttpServletRequest request,
-            HttpServletResponse response,
+            @NonNull HttpServletRequest request,
+            @NonNull HttpServletResponse response,
             Object handler, Exception ex) {
-        responseSendTime = LocalDateTime.now();
-        LogView logView = new LogView(
+        LocalDateTime responseSendTime = LocalDateTime.now();
+        logView = new LogView(
                 LocalDateTime.now(),
                 request.getMethod(),
                 String.valueOf(request.getRequestURL()),
@@ -50,25 +50,25 @@ public class HttpLoggingInterceptor implements HandlerInterceptor {
                 getResponseHeaders(response),
                 requestReceiveTime,
                 responseSendTime,
-                Duration.between(requestReceiveTime, responseSendTime).toMillis());
+                getDuration(requestReceiveTime,responseSendTime));
 
-        logger.log(INFO, logView.toString());
+        sendLog(INFO, logView.toString());
         if (ex != null) {
-            logger.log(ERROR, "ERROR " + LocalDateTime.now() + " Произошла ошибка. Запрос: " +
-                    request.getMethod() + ", URL: " + request.getRequestURL() + ".");
+            sendLog(ERROR, "ERROR " + LocalDateTime.now() + " Произошла ошибка. Запрос: " +
+                    request.getMethod() + ", URL: " + request.getRequestURL() + "."+"Доп. информация: "+ex.getMessage()+".");
         }
 
 
     }
 
-    private Map<String, String> getResponseHeaders(HttpServletResponse response) {
+    Map<String, String> getResponseHeaders(HttpServletResponse response) {
         Map<String, String> headers = new HashMap<>();
         response.getHeaderNames().forEach(headerName ->
                 headers.put(headerName, response.getHeader(headerName)));
         return headers;
     }
 
-    private Map<String, String> getRequestHeaders(HttpServletRequest request) {
+    Map<String, String> getRequestHeaders(HttpServletRequest request) {
         Map<String, String> headers = new HashMap<>();
         Enumeration<String> headerNames = request.getHeaderNames();
         while (headerNames.hasMoreElements()) {
@@ -77,5 +77,25 @@ public class HttpLoggingInterceptor implements HandlerInterceptor {
             headers.put(key, value);
         }
         return headers;
+    }
+
+    void sendLog(Level level, String message){
+        logger.log(level, message);
+    }
+
+    Long getDuration(LocalDateTime requestReceiveTime, LocalDateTime responseSendTime){
+        return Duration.between(requestReceiveTime, responseSendTime).toMillis();
+    }
+
+    public LocalDateTime getRequestReceiveTime() {
+        return requestReceiveTime;
+    }
+
+    public void setRequestReceiveTime(LocalDateTime requestReceiveTime) {
+        this.requestReceiveTime = requestReceiveTime;
+    }
+
+    public LogView getLogView() {
+        return logView;
     }
 }
