@@ -72,11 +72,11 @@ log4j.appender.HTTPLOGGERCONSOLE.layout=org.apache.log4j.SimpleLayout
 
 2) В pom.xml файл основного приложения в раздел dependencies добавить зависимость:
 
-   <dependency>
-            <groupId>com.alekseyz.testtask</groupId>
-            <artifactId>http-logger-spring-boot-starter</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-  </dependency>
+   <pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;com.alekseyz.testtask&lt;/groupId&gt;
+    &lt;artifactId&gt;http-logger-spring-boot-starter&lt;/artifactId&gt;
+    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
 
 3) В файле настроек основного приложения application.properties (application.yaml) добавить свойство:
 
