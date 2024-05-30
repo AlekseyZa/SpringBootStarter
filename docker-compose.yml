@@ -1,0 +1,9 @@
+services:
+  application:
+    build:
+      context: crudapp
+      dockerfile: crudapp/Dockerfile
+    ports:
+      - "8080:8080"
+    container_name: app
+
