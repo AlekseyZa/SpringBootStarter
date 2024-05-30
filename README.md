@@ -45,23 +45,23 @@ HTTP LOG SET END
 При необходимости формат вывода/записи логов можно настроить путем добавления в папку src/main/resources файла параметров с названием log4j.properties, 
 в котором можно переопределить следующие свойства (даже если требуется изменить только один параметр, в файле нужно указать все эти параметры):
 
-log4j.rootLogger = INFO, HTTPLOGGERCONSOLE, HTTPLOGGERFILE
+`log4j.rootLogger = INFO, HTTPLOGGERCONSOLE, HTTPLOGGERFILE`
 
-log4j.appender.HTTPLOGGERFILE.layout=org.apache.log4j.SimpleLayout
+`log4j.appender.HTTPLOGGERFILE.layout=org.apache.log4j.SimpleLayout`
 
-log4j.appender.HTTPLOGGERFILE = org.apache.log4j.RollingFileAppender
+`log4j.appender.HTTPLOGGERFILE = org.apache.log4j.RollingFileAppender`
 
-log4j.appender.HTTPLOGGERFILE.File=HTTPLOGGING.log
+`log4j.appender.HTTPLOGGERFILE.File=HTTPLOGGING.log`
 
-log4j.appender.HTTPLOGGERFILE.MaxFileSize=1MB
+`log4j.appender.HTTPLOGGERFILE.MaxFileSize=1MB`
 
-log4j.appender.HTTPLOGGERFILE.MaxBackupIndex=3
+`log4j.appender.HTTPLOGGERFILE.MaxBackupIndex=3`
 
-log4j.appender.HTTPLOGGERCONSOLE=org.apache.log4j.ConsoleAppender
+`log4j.appender.HTTPLOGGERCONSOLE=org.apache.log4j.ConsoleAppender`
 
-log4j.appender.HTTPLOGGERCONSOLE.threshold=INFO
+`log4j.appender.HTTPLOGGERCONSOLE.threshold=INFO`
 
-log4j.appender.HTTPLOGGERCONSOLE.layout=org.apache.log4j.SimpleLayout
+`log4j.appender.HTTPLOGGERCONSOLE.layout=org.apache.log4j.SimpleLayout`
 
 Также можно прописать дополнительные настройки параметров. 
 
