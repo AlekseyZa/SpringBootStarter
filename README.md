@@ -130,11 +130,11 @@ docker-compose up
    
 mvn clean install
 
-5)	Перейти в каталог внешнего проекта и собрать тестовый проект
+4)	Перейти в каталог внешнего проекта и собрать тестовый проект
    
 mvn clean package
 
-6)	Далее выполнить
+5)	Далее выполнить
    
 java -jar target/ crudapp-0.0.1-SNAPSHOT.jar
 
