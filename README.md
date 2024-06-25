@@ -143,5 +143,3 @@ Log4j
 
 Lombok
 
-Swagger
-
