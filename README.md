@@ -127,3 +127,21 @@ docker-compose up
 Для тестирования можно использовать браузер, postman, swagger-ui. Вариант для Postman: 
 
 1) Запустить коллекцию Postman через одноименное приложение, результат – статус 200 по всем запросам
+
+
+###  В проекте использовано:
+
+Spring boot 3
+
+Postgres
+
+Docker
+
+JUnit5
+
+Log4j
+
+Lombok
+
+Swagger
+
