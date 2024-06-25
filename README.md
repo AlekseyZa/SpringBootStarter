@@ -2,6 +2,7 @@
 
 
 Разработать Spring Boot Starter, который предоставит возможность логировать HTTP запросы в стороннем приложении на базе Spring Boot.
+
 Полное описание требований в файле: techSpecification/Specification.txt
 
 
